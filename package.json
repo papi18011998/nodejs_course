@@ -1,0 +1,17 @@
+{
+  "name": "first_project",
+  "version": "1.0.0",
+  "description": "Ce projet permet d'apprendre node",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "papi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
