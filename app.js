@@ -1,8 +1,9 @@
 const express = require('express')
-const pokemons = require('./api/mock-pokemon.js')
+var pokemons = require('./api/mock-pokemon.js')
 const {success} = require('./helpers/helper.js')
 const bodyParser = require('body-parser')
 const morgan  = require('morgan')
+const { application } = require('express')
 const app = express()
 const port = 3000
 
@@ -31,4 +32,21 @@ app.post('/api/pokemons',(req,res)=>{
     res.json(success(message,pokemonCreated))
 })
 
+app.put('/api/pokemons/:id',(req,res)=>{
+    const id = parseInt(req.params.id)
+    const pokemonUpdated = {...req.body,id:id} 
+    pokemons = pokemons.map((pokemon) => {
+        return pokemon.id === id ? pokemonUpdated : pokemon
+    })
+    const message = 'Le pokemon a été modifié.'
+    res.json(success(message,pokemonUpdated))
+})
+
+application.delete('/api/pokemons/:id',(req,res)=>{
+    const id = parseInt(req.params.id)
+    const pokemonDeleted = pokemons.find((pokemon)=> pokemon.id === id)
+    pokemons.filter((pokemon)=>{pokemon.id!==id}) 
+    const message = 'Le pokemon a été supprimeé.'
+    res.json(success(message,pokemonDeleted))
+})
 app.listen(port,()=>console.log(`L'application tourne sur le port http://localhost:${port}`))
