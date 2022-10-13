@@ -23,17 +23,18 @@ const Pokemon = PokemonModel(sequelize,DataTypes);
 
 
 const initDb =() =>{
-    sequelize.sync({force:true})
+    sequelize.sync({alter:true})
         .then(()=>{
-            pokemons.map((pokemon)=>{
-                Pokemon.create({
-                    name: pokemon.name,
-                    hp: pokemon.hp,
-                    cp: pokemon.cp,
-                    picture: pokemon.picture,
-                    types: pokemon.types.join()
-                }).then(resp=>console.log(resp.toJSON()))
-            })
+            // pokemons.map((pokemon)=>{
+            //     Pokemon.create({
+            //         name: pokemon.name,
+            //         hp: pokemon.hp,
+            //         cp: pokemon.cp,
+            //         picture: pokemon.picture,
+            //         types: pokemon.types
+            //     }).then(resp=>console.log(resp.toJSON()))
+            // })
+            console.log('Connexion etablie !!!')
         })
 }
 
