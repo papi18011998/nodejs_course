@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const morgan  = require('morgan')
 const app = express()
 const sequelize = require('./src/db/sequelize') 
-const port = 8002
+const port = 3000
 
 app
 .use(morgan('dev'))
@@ -22,4 +22,10 @@ require('./src/routes/addPokemon')(app)
 require('./src/routes/updatePokemon')(app)
 // suppression de pokemon
 require('./src/routes/deletePokemon')(app)
+
+// Generattion du code 404 Not Found
+app.use(({res})=>{
+    const message ="La ressource demande est indisponible"
+    res.status(404).json({message})
+})
 app.listen(port,()=>console.log(`L'application tourne sur le port http://localhost:${port}`))
